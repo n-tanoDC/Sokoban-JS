@@ -18,5 +18,7 @@ loadMap($dom);
 
 echo $dom->saveHTML();
 ?>
+
+<script src="js/game.js"></script>
 </body>
 </html>

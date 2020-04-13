@@ -20,6 +20,9 @@ function loadMap(DOMDocument $dom) {
 
     for($i = 0 ; $i < $tds->length ; $i++) {
         switch ($map[$i]) {
+            case '0':
+                $tds[$i]->setAttribute('class', 'empty');
+                break;
             case '1':
                 $tds[$i]->setAttribute('class', 'wall');
                 break;
