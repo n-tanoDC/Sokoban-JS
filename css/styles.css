@@ -1,0 +1,42 @@
+table {
+    border-collapse: collapse;
+}
+
+td {
+    width: 34px;
+    height: 34px;
+    border: 1px solid grey;
+}
+
+.mario_up {
+    background: url(../sprites/mario_up.gif);
+}
+
+.mario_down {
+    background: url(../sprites/mario_down.gif);
+}
+
+.mario_left {
+    background: url(../sprites/mario_left.gif);
+}
+
+.mario_right {
+    background: url(../sprites/mario_right.gif);
+}
+
+.wall {
+    background: url(../sprites/wall.jpg);
+}
+
+.box {
+    background: url(../sprites/box.jpg);
+}
+
+.box_ok {
+    background: url(../sprites/box_ok.jpg);
+}
+
+.goal {
+    background: url(../sprites/goal.png);
+}
+
