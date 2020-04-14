@@ -19,6 +19,7 @@ loadMap($dom);
 echo $dom->saveHTML();
 ?>
 
+<script src="js/functions.js"></script>
 <script src="js/game.js"></script>
 </body>
 </html>
