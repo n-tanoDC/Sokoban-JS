@@ -8,6 +8,10 @@ td {
     border: 1px solid grey;
 }
 
+.goal {
+    background: url(../sprites/goal.png);
+}
+
 .mario_up {
     background: url(../sprites/mario_up.gif);
 }
@@ -36,7 +40,14 @@ td {
     background: url(../sprites/box_ok.jpg);
 }
 
-.goal {
-    background: url(../sprites/goal.png);
+.blink {
+    animation: blinker 1s linear infinite;
 }
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
 

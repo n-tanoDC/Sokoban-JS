@@ -1,8 +1,9 @@
 let map = document.querySelectorAll('td'),
-    mapSize = Math.sqrt(map.length), player, i,
+    mapSize = Math.sqrt(map.length), player, i, win = false,
     up = [], down = [], left = [], right = [];
 
 addEventListener('keydown', function (e) {
+    // Get player position and whats around it
     for (i = 0; i < map.length; i++) {
         if (map[i].className.includes('mario')) {
             player = map[i];
@@ -13,18 +14,36 @@ addEventListener('keydown', function (e) {
         }
     }
 
+    // Move player (or not) according to the key pressed
     switch (e.code) {
         case 'ArrowUp':
-            movePlayer(map, player, up);
+            movePlayer(player, up);
             break;
         case 'ArrowDown':
-            movePlayer(map, player, down);
+            movePlayer(player, down);
             break;
         case 'ArrowLeft':
-            movePlayer(map, player, left);
+            movePlayer(player, left);
             break;
         case 'ArrowRight':
-            movePlayer(map, player, right);
+            movePlayer(player, right);
             break;
+    }
+});
+
+// After the player pressed a key, we check if he won
+
+addEventListener('keyup', function(){
+    for (i = 0 ; i < map.length ; i++) {
+        win = true;
+        if (map[i].className.includes('goal')) {
+            win = false;
+            break;
+        }
+    }
+
+    if(win){
+        alert('Vous avez gagné !');
+        win = false;
     }
 });
