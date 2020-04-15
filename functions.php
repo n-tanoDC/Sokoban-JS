@@ -1,9 +1,10 @@
 <?php
 
-function loadMap(DOMDocument $dom) {
+function loadMap(DOMDocument $dom, int $lvl = 1) {
     $size = 12;
     $mapsFile = fopen('niveaux.txt', 'r');
-    $map = str_split(fgets($mapsFile));
+    fseek($mapsFile, (($size*$size+2)*($lvl-1)));
+    $map = str_split(fgets($mapsFile, $size*$size+1));
     $table = $dom->createElement('table');
 
     for ($i = 0 ; $i < $size ; $i++) {
