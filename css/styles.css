@@ -8,6 +8,17 @@ td {
     border: 1px solid grey;
 }
 
+.tile {
+    width: 34px;
+    height: 34px;
+}
+
+#selected_tile {
+    width: 34px;
+    height: 34px;
+    position: absolute;
+}
+
 .goal {
     background: url(../sprites/goal.png);
 }

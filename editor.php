@@ -9,19 +9,28 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<div id="gamescreen">
+<div id="game_screen">
     <?php
     include 'functions.php';
 
     $dom = new DOMDocument();
 
-    loadMap($dom);
+    loadMap($dom, false);
 
     echo $dom->saveHTML();
     ?>
+    <div id="selected_tile" class="wall tile"></div>
+    <a href="index.php">Index</a>
+    <label><input type="checkbox">Eraser mode</label>
 </div>
-<a href="editor.php">Editeur</a>
+<div>
+    <div id="goal" class="goal tile"> </div>
+    <div id="wall" class="wall tile"> </div>
+    <div id="box" class="box tile"> </div>
+    <div id="box_ok" class="box_ok tile"> </div>
+    <div id="mario" class="mario_down tile"> </div>
+</div>
 <script src="js/functions.js"></script>
-<script src="js/game.js"></script>
+<script src="js/editor.js"></script>
 </body>
 </html>
