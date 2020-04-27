@@ -1,5 +1,8 @@
 let map = document.querySelectorAll('td'),
-    mapSize = Math.sqrt(map.length), player, i, win = false,
+    mapSize = Math.sqrt(map.length),
+    player,
+    i,
+    win = false,
     up = [], down = [], left = [], right = [];
 
 addEventListener('keydown', function (e) {
@@ -33,7 +36,8 @@ addEventListener('keydown', function (e) {
 
 // After the player pressed a key, we check if he won
 
-addEventListener('keyup', function(){
+addEventListener('keyup', function(e){
+
     for (i = 0 ; i < map.length ; i++) {
         win = true;
         if (map[i].className.includes('goal')) {

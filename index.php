@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<div id="gamescreen">
+<div id="game_screen">
     <?php
     include 'functions.php';
 

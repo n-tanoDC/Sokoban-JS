@@ -1,11 +1,12 @@
 table {
     border-collapse: collapse;
+    background: rgb(101, 159, 62);
 }
 
 td {
-    width: 34px;
-    height: 34px;
-    border: 1px solid grey;
+    width: 32px;
+    height: 32px;
+    border: 0px solid grey;
 }
 
 .tile {
@@ -17,38 +18,47 @@ td {
     width: 34px;
     height: 34px;
     position: absolute;
+    display: none;
 }
 
 .goal {
-    background: url(../sprites/goal.png);
+    background-size: cover;
+    background: url(../sprites/goal.png)  no-repeat center;
 }
 
 .mario_up {
-    background: url(../sprites/mario_up.gif);
+    background-size: cover;
+    background: url(../sprites/player_up.png) no-repeat center;
 }
 
 .mario_down {
-    background: url(../sprites/mario_down.gif);
+    background-size: cover;
+    background: url(../sprites/player_down.png) no-repeat center;
 }
 
 .mario_left {
-    background: url(../sprites/mario_left.gif);
+    background-size: cover;
+    background: url(../sprites/player_left.png) no-repeat center;
 }
 
 .mario_right {
-    background: url(../sprites/mario_right.gif);
+    background-size: cover;
+    background: url(../sprites/player_right.png) no-repeat center;
 }
 
 .wall {
-    background: url(../sprites/wall.jpg);
+    background-size: cover;
+    background: url(../sprites/wall.png) no-repeat center;
 }
 
 .box {
-    background: url(../sprites/box.jpg);
+    background-size: cover;
+    background: url(../sprites/box.png) no-repeat center;
 }
 
 .box_ok {
-    background: url(../sprites/box_ok.jpg);
+    background-size: cover;
+    background: url(../sprites/box_ok.png) no-repeat center;
 }
 
 .blink {

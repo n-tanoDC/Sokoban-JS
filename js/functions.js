@@ -1,7 +1,12 @@
 function movePlayer(player, direction){
 
     if (direction[0].className === 'wall') {
-        player.className = "mario_" + direction[2];
+        if (player.classList.contains('goal')) {
+            player.className = 'mario_' + direction[2] + ' goal blink';
+        }
+        else {
+            player.className = "mario_" + direction[2];
+        }
     } else if ((direction[0].className === 'box' || direction[0].className === 'box_ok') && (direction[1].className === 'box' || direction[1].className === 'box_ok' || direction[1].className === 'wall')) {
         player.className = "mario_" + direction[2];
     } else if ((direction[0].className === 'box' || direction[0].className === 'box_ok') && (direction[1].className !== 'box_ok' && direction[1].className !== 'box' && direction[1].className !== 'wall')) {
@@ -10,16 +15,12 @@ function movePlayer(player, direction){
         direction[0].className = "mario_" + direction[2] + ' goal blink';
         player.className = 'empty';
     } else {
-        if (player.className.includes('goal')) {
+        if (player.classList.contains('goal')) {
             player.className = 'goal';
         } else {
             player.className = 'empty';
         }
         direction[0].className = "mario_" + direction[2];
-    }
-
-    if (player.className.includes('goal')) {
-
     }
 }
 
@@ -41,4 +42,38 @@ function moveBox(player, direction) {
         direction[1].className = 'box';
     }
 
+}
+
+function mapToStr() {
+    let map = document.querySelectorAll('td');
+    let strMap = '';
+    for(let i = 0 ; i < map.length ; i ++){
+        switch(map[i].className){
+            case 'wall':
+                strMap += '1';
+                break;
+            case 'box':
+                strMap += '2';
+                break;
+            case 'goal':
+                strMap += '3';
+                break;
+            case 'mario_down':
+                strMap += '4';
+                break;
+            case 'box_ok':
+                strMap += '5';
+                break;
+            default:
+                strMap += '0';
+        }
+    }
+    return strMap;
+}
+
+function voidMap() {
+    let map = document.querySelectorAll('td');
+    for(let i = 0 ; i < map.length ; i ++){
+        map[i].className = 'empty';
+    }
 }

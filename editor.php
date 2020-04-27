@@ -9,20 +9,26 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<div id="game_screen">
-    <?php
-    include 'functions.php';
+    <div id="game_screen">
+        <form action="admin.php" method="post">
+            <input type="hidden" name="saved_map" id="saved_map">
+            <?php
+            include 'functions.php';
 
-    $dom = new DOMDocument();
+            $dom = new DOMDocument();
 
-    loadMap($dom, false);
+            loadMap($dom, false);
 
-    echo $dom->saveHTML();
-    ?>
-    <div id="selected_tile" class="wall tile"></div>
-    <a href="index.php">Index</a>
-    <label><input type="checkbox">Eraser mode</label>
-</div>
+            echo $dom->saveHTML();
+
+                for($i = 1 ; $i <= 10 ; $i++) {
+                    echo '<input type="radio" name="lvl" value="' . $i . '" required>' . $i;
+                }
+            ?>
+            <button id="save_button">Sauvegarder</button>
+        </form>
+        <div id="selected_tile" class="wall"></div>
+    </div>
 <div>
     <div id="goal" class="goal tile"> </div>
     <div id="wall" class="wall tile"> </div>

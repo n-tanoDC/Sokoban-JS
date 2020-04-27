@@ -1,11 +1,11 @@
 <?php
 
 function loadMap(DOMDocument $dom, bool $game = true, int $lvl = 1) {
-    $size = 12;
-    $mapsFile = fopen('niveaux.txt', 'r');
-    fseek($mapsFile, (($size*$size+2)*($lvl-1)));
-    $map = str_split(fgets($mapsFile, $size*$size+1));
+
     $table = $dom->createElement('table');
+    $allMaps = explode("\n", file_get_contents("levels.php"));
+    $map = $allMaps[$lvl];
+    $size = sqrt(strlen($map));
 
     for ($i = 0 ; $i < $size ; $i++) {
         $tr = $dom->createElement('tr');
@@ -37,7 +37,16 @@ function loadMap(DOMDocument $dom, bool $game = true, int $lvl = 1) {
                 case '4':
                     $tds[$i]->setAttribute('class', 'mario_down');
                     break;
+                case '5':
+                    $tds[$i]->setAttribute('class', 'box_ok');
+                    break;
             }
         }
     }
+}
+
+function saveLvl(string $file, float $lvl, string $content) {
+    $toCopy = explode("\n", file_get_contents($file));
+    $toCopy[$lvl] = $content;
+    file_put_contents($file, implode("\n", $toCopy));
 }
