@@ -1,3 +1,5 @@
 .idea/
 test/
 *.bak
+.mwb
+backup_sprites/
