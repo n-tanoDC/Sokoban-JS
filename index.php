@@ -1,27 +1,21 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sokoban JS</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-<div id="game_screen">
-    <?php
-    include 'functions.php';
+<?php
 
-    $dom = new DOMDocument();
+$title = 'Accueil';
 
-    loadMap($dom);
+require_once 'includes/header.php';
+?>
+<div id="menu">
+    <div class="header">
+        <img src="sprites/box.png">
+        <h1>SOKOBAN</h1>
+        <img src="sprites/box.png">
+    </div>
 
-    echo $dom->saveHTML();
-    ?>
+    <ul>
+        <li><h2><a href="game.php?lvl=1">Jouer</a></h2></li>
+        <li><h2><a href="#">Commandes</a></h2></li>
+    </ul>
+
+    <h3><a href="admin/admin.php">Admin</a></h3>
 </div>
-<a href="editor.php">Editeur</a>
-<script src="js/functions.js"></script>
-<script src="js/game.js"></script>
-</body>
-</html>
+<?php getFooter();

@@ -1,3 +1,8 @@
+// Get URL parameters to know the current LVL
+let url_string = window.location.href
+let url = new URL(url_string);
+let lvl = url.searchParams.get("lvl");
+
 let map = document.querySelectorAll('td'),
     mapSize = Math.sqrt(map.length),
     player,
@@ -49,5 +54,11 @@ addEventListener('keyup', function(e){
     if(win){
         alert('Vous avez gagné !');
         win = false;
+        if (lvl >= 10) {
+            alert('Vous avez fini le jeu')
+        } else {
+            lvl++;
+            location.href = 'game.php?lvl=' + lvl;
+        }
     }
 });
