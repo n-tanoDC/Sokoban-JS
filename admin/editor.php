@@ -25,6 +25,6 @@ require_once __DIR__ . "/../includes/header.php";
     <div id="wall" class="wall tile"> </div>
     <div id="box" class="box tile"> </div>
     <div id="box_ok" class="box_ok tile"> </div>
-    <div id="mario" class="mario_down tile"> </div>
+    <div id="player" class="player_down tile"> </div>
 </div>
 <?php getFooter(['html2canvas.js', 'functions.js', 'editor.js']);

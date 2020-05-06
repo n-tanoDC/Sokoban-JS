@@ -13,7 +13,7 @@ let map = document.querySelectorAll('td'),
 addEventListener('keydown', function (e) {
     // Get player position and whats around it
     for (i = 0; i < map.length; i++) {
-        if (map[i].className.includes('mario')) {
+        if (map[i].className.includes('player')) {
             player = map[i];
             up = [map[i - mapSize], map[i - mapSize * 2], 'up'];
             down = [map[i + mapSize], map[i + mapSize*2], 'down'];
@@ -35,6 +35,9 @@ addEventListener('keydown', function (e) {
             break;
         case 'ArrowRight':
             movePlayer(player, right);
+            break;
+        case 'Space':
+            document.location.reload();
             break;
     }
 });

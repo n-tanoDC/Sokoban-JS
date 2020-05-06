@@ -2,17 +2,17 @@ function movePlayer(player, direction){
 
     if (direction[0].className === 'wall') {
         if (player.classList.contains('goal')) {
-            player.className = 'mario_' + direction[2] + ' goal blink';
+            player.className = 'player_' + direction[2] + ' goal blink';
         }
         else {
-            player.className = "mario_" + direction[2];
+            player.className = "player_" + direction[2];
         }
     } else if ((direction[0].className === 'box' || direction[0].className === 'box_ok') && (direction[1].className === 'box' || direction[1].className === 'box_ok' || direction[1].className === 'wall')) {
-        player.className = "mario_" + direction[2];
+        player.className = "player_" + direction[2];
     } else if ((direction[0].className === 'box' || direction[0].className === 'box_ok') && (direction[1].className !== 'box_ok' && direction[1].className !== 'box' && direction[1].className !== 'wall')) {
         moveBox(player, direction);
     } else if (direction[0].className === 'goal') {
-        direction[0].className = "mario_" + direction[2] + ' goal blink';
+        direction[0].className = "player_" + direction[2] + ' goal blink';
         player.className = 'empty';
     } else {
         if (player.classList.contains('goal')) {
@@ -20,7 +20,7 @@ function movePlayer(player, direction){
         } else {
             player.className = 'empty';
         }
-        direction[0].className = "mario_" + direction[2];
+        direction[0].className = "player_" + direction[2];
     }
 }
 
@@ -36,9 +36,9 @@ function moveBox(player, direction) {
         } else  {
             direction[1].className = 'box';
         }
-        direction[0].className = 'mario_' + direction[2];
+        direction[0].className = 'player_' + direction[2];
     } else if (direction[0].className === 'box_ok') {
-        direction[0].className = 'mario_' + direction[2] + ' goal blink';
+        direction[0].className = 'player_' + direction[2] + ' goal blink';
         direction[1].className = 'box';
     }
 
@@ -58,7 +58,7 @@ function mapToStr() {
             case 'goal':
                 strMap += '3';
                 break;
-            case 'mario_down':
+            case 'player_down':
                 strMap += '4';
                 break;
             case 'box_ok':

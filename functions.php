@@ -35,7 +35,7 @@ function loadMap(DOMDocument $dom, float $lvl) {
                 $tds[$i]->setAttribute('class', 'goal');
                 break;
             case '4':
-                $tds[$i]->setAttribute('class', 'mario_down');
+                $tds[$i]->setAttribute('class', 'player_down');
                 break;
             case '5':
                 $tds[$i]->setAttribute('class', 'box_ok');

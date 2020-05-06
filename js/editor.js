@@ -3,7 +3,7 @@ let selectedTile = document.querySelector('#selected_tile'),
     box = document.querySelector('#box').addEventListener('click', function(){selectedTile.className = 'box'}),
     wall = document.querySelector('#wall').addEventListener('click', function(){selectedTile.className = 'wall'}),
     box_ok = document.querySelector('#box_ok').addEventListener('click', function(){selectedTile.className = 'box_ok'}),
-    mario = document.querySelector('#mario').addEventListener('click', function(){selectedTile.className = 'mario_down'}),
+    player = document.querySelector('#player').addEventListener('click', function(){selectedTile.className = 'player_down'}),
     goal = document.querySelector('#goal').addEventListener('click', function(){selectedTile.className = 'goal'}),
 
     map = document.querySelectorAll('td'),

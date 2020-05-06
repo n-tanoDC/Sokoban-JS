@@ -1,15 +1,16 @@
 <?php
 $title = 'Sokoban';
-require_once 'includes/header.php' ?>
+require_once 'includes/header.php';
+
+if(isset($_GET['lvl'])){
+    $lvl = $_GET['lvl'];
+} else {
+    $lvl = 1;
+}
+?>
+<h1 id="lvl-title">Niveau <?= $lvl ?></h1>
 <div id="game_screen">
     <?php
-
-    if(isset($_GET['lvl'])){
-        $lvl = $_GET['lvl'];
-    } else {
-        $lvl = 1;
-    }
-
     $dom = new DOMDocument();
 
     loadMap($dom, $lvl);
