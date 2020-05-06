@@ -11,7 +11,17 @@ let selectedTile = document.querySelector('#selected_tile'),
 
     eraserMode = false, clicGauche = false,
 
-    button = document.querySelector('#save_button');
+    button = document.querySelector('#save_button'),
+
+    canvas, data, p,
+    form = document.querySelector('form'),
+    table = document.querySelector('table');
+
+// Transforms the table into a canvas
+
+html2canvas(table).then(function (e) {
+    canvas = e;
+});
 
 // Event listeners pour dessiner la map :
 for (let i = 0 ; i < map.length ; i++) {
@@ -62,8 +72,13 @@ document.addEventListener('keyup', function (e) {
             voidMap();
     }});
 
-button.addEventListener('mouseup', function () {
+button.addEventListener('mousedown', function () {
     savedMap.value = mapToStr();
-    alert(savedMap.value);
+    data = canvas.toDataURL();
+    p = document.createElement('input');
+    p.setAttribute('type', 'hidden');
+    p.setAttribute('name', 'data');
+    p.setAttribute('value', data);
+    form.appendChild(p);
 });
 
