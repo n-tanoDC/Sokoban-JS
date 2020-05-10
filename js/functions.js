@@ -1,47 +1,39 @@
-function movePlayer(player, direction){
+function movePlayer(player, d){
 
-    if (direction[0].className === 'wall') {
+    if (d[0].className === 'wall') {
         if (player.classList.contains('goal')) {
-            player.className = 'player_' + direction[2] + ' goal blink';
+            player.className = 'player_' + d[2] + ' goal blink';
         }
         else {
-            player.className = "player_" + direction[2];
+            player.className = "player_" + d[2];
         }
-    } else if ((direction[0].className === 'box' || direction[0].className === 'box_ok') && (direction[1].className === 'box' || direction[1].className === 'box_ok' || direction[1].className === 'wall')) {
-        player.className = "player_" + direction[2];
-    } else if ((direction[0].className === 'box' || direction[0].className === 'box_ok') && (direction[1].className !== 'box_ok' && direction[1].className !== 'box' && direction[1].className !== 'wall')) {
-        moveBox(player, direction);
-    } else if (direction[0].className === 'goal') {
-        direction[0].className = "player_" + direction[2] + ' goal blink';
-        player.className = 'empty';
+    } else if ((d[0].className === 'box' || d[0].className === 'box_ok') && (d[1].className === 'box' || d[1].className === 'box_ok' || d[1].className === 'wall')) {
+        player.className = "player_" + d[2];
+    } else if (d[0].className === 'box' || d[0].className === 'box_ok') {
+        moveBox(player, d);
+    } else if (d[0].className === 'goal') {
+        player.className = player.classList.contains('goal') ? 'goal' : 'empty';
+        d[0].className = "player_" + d[2] + ' goal blink';
     } else {
         if (player.classList.contains('goal')) {
             player.className = 'goal';
         } else {
             player.className = 'empty';
         }
-        direction[0].className = "player_" + direction[2];
+        d[0].className = "player_" + d[2];
     }
 }
 
-function moveBox(player, direction) {
-    if (player.className.includes('goal')) {
-        player.className = 'goal';
-    } else {
-        player.className = 'empty';
-    }
-    if (direction[0].className === 'box') {
-        if (direction[1].className === 'goal') {
-            direction[1].className = 'box_ok';
-        } else  {
-            direction[1].className = 'box';
-        }
-        direction[0].className = 'player_' + direction[2];
-    } else if (direction[0].className === 'box_ok') {
-        direction[0].className = 'player_' + direction[2] + ' goal blink';
-        direction[1].className = 'box';
-    }
+function moveBox(player, d) {
+    player.className = player.classList.contains('goal') ? 'goal' : 'empty';
 
+    if (d[1].className === 'goal') {
+        d[1].className = 'box_ok';
+        d[0].className = d[0].className === 'box_ok' ? 'player_' + d[2] + ' goal blink' : 'player_' + d[2];
+    } else  {
+        d[1].className = 'box';
+        d[0].className = d[0].className === 'box_ok' ? 'player_' + d[2] + ' goal blink' : 'player_' + d[2];
+    }
 }
 
 function mapToStr() {
