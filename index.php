@@ -12,7 +12,7 @@ require_once 'includes/header.php';
     </div>
 
     <ul>
-        <li><h2><a href="game.php?lvl=1">Jouer</a></h2></li>
+        <li><h2><a href="game.php">Jouer</a></h2></li>
         <li><h2><a href="#">Commandes</a></h2></li>
     </ul>
 

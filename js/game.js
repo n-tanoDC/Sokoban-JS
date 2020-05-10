@@ -1,9 +1,12 @@
 // Get URL parameters to know the current LVL
-let url_string = window.location.href
+/*let url_string = window.location.href;
 let url = new URL(url_string);
-let lvl = url.searchParams.get("lvl");
+let lvl = url.searchParams.get("lvl");*/
 
-let map = document.querySelectorAll('td'),
+let lvl = document.querySelector('#lvl_input'),
+    life = document.querySelector('#life_input'),
+    form = document.querySelector('#data_form'),
+    map = document.querySelectorAll('td'),
     height = document.querySelectorAll('tr').length,
     width = map.length/height,
     player,
@@ -18,7 +21,7 @@ addEventListener('keydown', function (e) {
             player = map[i];
             up = [map[i - width], map[i - width * 2], 'up'];
             down = [map[i + width], map[i + width *2], 'down'];
-            left = [map[i - 1], left2 = map[i - 2], 'left'];
+            left = [map[i - 1], map[i - 2], 'left'];
             right = [map[i + 1], map[i + 2], 'right'];
         }
     }
@@ -38,14 +41,20 @@ addEventListener('keydown', function (e) {
             movePlayer(player, right);
             break;
         case 'Space':
-            document.location.reload();
+            life.value--;
+            if (life.value > 0) {
+                form.submit();
+            } else {
+                alert('Game Over !');
+                location.replace('index.php');
+            }
             break;
     }
 });
 
 // After the player pressed a key, we check if he won
 
-addEventListener('keyup', function(e){
+addEventListener('keyup', function(){
 
     for (i = 0 ; i < map.length ; i++) {
         win = true;
@@ -58,11 +67,11 @@ addEventListener('keyup', function(e){
     if(win){
         alert('Vous avez gagné !');
         win = false;
-        if (lvl >= 10) {
+        if (lvl.value >= 10) {
             alert('Vous avez fini le jeu')
         } else {
-            lvl++;
-            location.href = 'game.php?lvl=' + lvl;
+            lvl.value++;
+            form.submit();
         }
     }
 });
