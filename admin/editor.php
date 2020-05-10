@@ -16,6 +16,13 @@ require_once __DIR__ . "/../includes/header.php";
             echo $dom->saveHTML();
             ?>
             <input type="hidden" value="<?= $lvl ?>" name="lvl">
+
+            <label for="map-width">Largeur</label>
+            <input type="number" id="map-width" name="width">
+
+            <label for="map-height">Hauteur</label>
+            <input type="number" id="map-height" name="height"><br>
+
             <button id="save_button">Sauvegarder</button>
         </form>
         <div id="selected_tile" class="wall"></div>
@@ -27,4 +34,4 @@ require_once __DIR__ . "/../includes/header.php";
     <div id="box_ok" class="box_ok tile"> </div>
     <div id="player" class="player_down tile"> </div>
 </div>
-<?php getFooter(['html2canvas.js', 'functions.js', 'editor.js']);
+<?php getFooter(['html2canvas.js', 'functions.js', 'editor.js'], true);

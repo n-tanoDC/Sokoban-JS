@@ -77,3 +77,79 @@ function voidMap() {
         map[i].className = 'empty';
     }
 }
+
+function changeHeight(map, height){
+    let currentHeight = document.querySelectorAll('tr').length,
+        currentWidth = document.querySelectorAll('td').length/currentHeight,
+        hDiff = height - currentHeight,
+        i, j;
+
+    if (hDiff > 0) {
+        for (i = 0 ; i < hDiff ; i++){
+            let newRow = map.firstElementChild.insertRow(-1);
+            for (j = 0 ; j < currentWidth ; j++) {
+                newRow.insertCell();
+            }
+        }
+    } else if (hDiff < 0) {
+        hDiff = Math.abs(hDiff);
+        for (i = 0 ; i < hDiff ; i++){
+            map.firstElementChild.deleteRow(-1);
+        }
+    }
+}
+
+function changeWidth(map, width) {
+    let trs = document.querySelectorAll('tr'),
+        currentWidth = document.querySelectorAll('td').length/trs.length,
+        wDiff = width - currentWidth,
+        i, j;
+
+    if (wDiff > 0) {
+        for (i = 0 ; i < trs.length ; i++){
+            for (j = 0 ; j < wDiff ; j++){
+                trs[i].insertCell();
+            }
+        }
+    } else if (wDiff < 0) {
+        wDiff = Math.abs(wDiff);
+        for (i = 0 ; i < trs.length ; i++){
+            for (j = 0 ; j < wDiff ; j++){
+                trs[i].deleteCell(-1);
+            }
+        }
+    }
+
+}
+
+function setListeners() {
+    let i,
+        map = document.querySelectorAll('td');
+    for (let i = 0 ; i < map.length ; i++) {
+        map[i].addEventListener('mousedown', function (e) {
+            if (e.button === 0) {
+                if(eraserMode){
+                    map[i].className = 'empty';
+                } else {
+                    map[i].className = selectedTile.className;
+                }
+                clicGauche = true;
+            } else if (e.button === 2) {
+                eraserMode = !eraserMode;
+            }
+        });
+        map[i].addEventListener('mouseup', function(){
+            clicGauche = false;
+        });
+        map[i].addEventListener('mouseover', function(){
+            if(clicGauche && !eraserMode){
+                map[i].className = selectedTile.className;
+            } else if(clicGauche && eraserMode){
+                map[i].className = 'empty';
+            }
+        });
+        map[i].addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        })
+    }
+}

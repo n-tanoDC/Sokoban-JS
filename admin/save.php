@@ -3,25 +3,30 @@ require_once __DIR__ . '/../functions.php';
 
 $map = $_POST['map'];
 $lvl = $_POST['lvl'];
+$width = $_POST['width'];
+$height = $_POST['height'];
 
-// Get the img-data from the html Form
-
+// Gets the img-data from the html Form
 $data = str_replace('data:image/png;base64,', '', $_POST['data']);
-
 $im = base64_decode($data);
 
-// Create the img resource
+// Creates the img resource
 $img = imagecreatefromstring($im);
-$filename = 'mins/map-min-lvl' . $lvl . '.jpeg';
 
-$created = imagepng($img, $filename);
+// Defines the path and filename
+$filename = 'mins/map-min-lvl' . $lvl . '.png';
 
-if($created){
-    $updated = updateMap($map, $lvl, $filename);
-}
+// Deletes the previous map png
+unlink($filename);
 
-if($updated) {
-    header('Location: admin.php');
-}
+// Creates the png file and pastes it in the right folder
+imagepng($img, $filename);
+
+// Updates the map in the database
+updateMap($map, $width, $height, $lvl, $filename);
+
+// Redirect to the admin page
+header('Location: admin.php');
+
 
 

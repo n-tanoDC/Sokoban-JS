@@ -9,48 +9,36 @@ let selectedTile = document.querySelector('#selected_tile'),
     map = document.querySelectorAll('td'),
     savedMap = document.querySelector('#saved_map'),
 
+    heightController = document.querySelector('#map-height'),
+    widthController = document.querySelector('#map-width'),
+
     eraserMode = false, clicGauche = false,
 
-    button = document.querySelector('#save_button'),
+    saveButton = document.querySelector('#save_button'),
 
     canvas, data, p,
     form = document.querySelector('form'),
     table = document.querySelector('table');
 
-// Transforms the table into a canvas
+heightController.value = table.querySelectorAll('tr').length;
+widthController.value = table.querySelector('tr').querySelectorAll('td').length;
 
+// Transforms the table into a canvas
 html2canvas(table).then(function (e) {
     canvas = e;
 });
 
-// Event listeners pour dessiner la map :
-for (let i = 0 ; i < map.length ; i++) {
-    map[i].addEventListener('mousedown', function (e) {
-        if (e.button === 0) {
-            if(eraserMode){
-                map[i].className = 'empty';
-            } else {
-                map[i].className = selectedTile.className;
-            }
-            clicGauche = true;
-        } else if (e.button === 2) {
-            eraserMode = !eraserMode;
-        }
-    });
-    map[i].addEventListener('mouseup', function(){
-        clicGauche = false;
-    });
-    map[i].addEventListener('mouseover', function(){
-        if(clicGauche && !eraserMode){
-            map[i].className = selectedTile.className;
-        } else if(clicGauche && eraserMode){
-            map[i].className = 'empty';
-        }
-    });
-    map[i].addEventListener('contextmenu', function (e) {
-        e.preventDefault();
-    })
-}
+setListeners();
+
+heightController.addEventListener('change', function () {
+    changeHeight(table, heightController.value);
+    setListeners();
+});
+
+widthController.addEventListener('change', function () {
+    changeWidth(table, widthController.value);
+    setListeners();
+});
 
 // Event Listener pour que selectedTile suive le mouvement de la souris :
 document.addEventListener('mousemove', function (e) {
@@ -72,7 +60,7 @@ document.addEventListener('keyup', function (e) {
             voidMap();
     }});
 
-button.addEventListener('mousedown', function () {
+saveButton.addEventListener('mousedown', function () {
     savedMap.value = mapToStr();
     data = canvas.toDataURL();
     p = document.createElement('input');

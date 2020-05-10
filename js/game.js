@@ -4,7 +4,8 @@ let url = new URL(url_string);
 let lvl = url.searchParams.get("lvl");
 
 let map = document.querySelectorAll('td'),
-    mapSize = Math.sqrt(map.length),
+    height = document.querySelectorAll('tr').length,
+    width = map.length/height,
     player,
     i,
     win = false,
@@ -15,8 +16,8 @@ addEventListener('keydown', function (e) {
     for (i = 0; i < map.length; i++) {
         if (map[i].className.includes('player')) {
             player = map[i];
-            up = [map[i - mapSize], map[i - mapSize * 2], 'up'];
-            down = [map[i + mapSize], map[i + mapSize*2], 'down'];
+            up = [map[i - width], map[i - width * 2], 'up'];
+            down = [map[i + width], map[i + width *2], 'down'];
             left = [map[i - 1], left2 = map[i - 2], 'left'];
             right = [map[i + 1], map[i + 2], 'right'];
         }

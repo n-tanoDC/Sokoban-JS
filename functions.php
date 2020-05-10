@@ -6,11 +6,13 @@ function loadMap(DOMDocument $dom, float $lvl) {
 
     $table = $dom->createElement('table');
     $map = getMap($lvl);
-    $size = sqrt(strlen($map));
+    $mapStr = str_split($map['map']);
+    $width = $map["width"];
+    $height = $map["height"];
 
-    for ($i = 0 ; $i < $size ; $i++) {
+    for ($i = 0 ; $i < $height ; $i++) {
         $tr = $dom->createElement('tr');
-        for ($j = 0 ; $j < $size ; $j++) {
+        for ($j = 0 ; $j < $width ; $j++) {
             $td = $dom->createElement('td');
             $tr->appendChild($td);
         }
@@ -20,8 +22,8 @@ function loadMap(DOMDocument $dom, float $lvl) {
     $dom->appendChild($table);
 
     $tds = $table->getElementsByTagName('td');
-    for($i = 0 ; $i < $tds->length ; $i++) {
-        switch ($map[$i]) {
+    for($i = 0 ; $i < count($tds) ; $i++) {
+        switch ($mapStr[$i]) {
             case '0':
                 $tds[$i]->setAttribute('class', 'empty');
                 break;
@@ -40,41 +42,45 @@ function loadMap(DOMDocument $dom, float $lvl) {
             case '5':
                 $tds[$i]->setAttribute('class', 'box_ok');
                 break;
+            default:
+                $tds[$i]->setAttribute('class', 'wall');
         }
     }
 }
 
-function getMap(float $lvl) : string {
+function getMap(float $lvl) : array {
     global $connection;
 
-    $query = "SELECT map FROM sokoban.lvl WHERE id = :lvl";
+    $query = "SELECT map, width, height FROM sokoban.lvl WHERE id = :lvl";
 
     $stmt = $connection->prepare($query);
     $stmt->bindValue(':lvl', $lvl);
     $stmt->execute();
 
-    return $stmt->fetch()[0];
+    return $stmt->fetch();
 }
 
-function updateMap(string $map, string $lvl, string $minPath) : bool {
+function updateMap(string $map, int $width, int $height, string $lvl, string $minPath) : bool {
     global $connection;
 
     $query = "
         UPDATE sokoban.lvl
-        SET map = :map, min_path = :minPath
+        SET map = :map, width = :width, height = :height, min_path = :minPath
         WHERE id = :lvl";
 
     $stmt = $connection->prepare($query);
     $stmt->bindValue(':map', $map);
     $stmt->bindValue(':minPath', $minPath);
     $stmt->bindValue(':lvl', $lvl);
+    $stmt->bindValue(':width', $width);
+    $stmt->bindValue(':height', $height);
 
     return $stmt->execute();
 }
 
-function getFooter(array $scripts = []) {
+function getFooter(array $scripts = [], bool $admin = false) {
     foreach ($scripts as $script) {
-        echo '<script src="js/' . $script .'"></script>';
+        echo '<script src="' . (!$admin ? 'js/' : '../js/') . $script . '"></script>';
     }
     echo '
     </body>
