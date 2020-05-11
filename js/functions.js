@@ -8,7 +8,12 @@ function movePlayer(player, d){
             player.className = "player_" + d[2];
         }
     } else if ((d[0].className === 'box' || d[0].className === 'box_ok') && (d[1].className === 'box' || d[1].className === 'box_ok' || d[1].className === 'wall')) {
-        player.className = "player_" + d[2];
+        if (player.classList.contains('goal')) {
+            player.className = 'player_' + d[2] + ' goal blink';
+        }
+        else {
+            player.className = "player_" + d[2];
+        }
     } else if (d[0].className === 'box' || d[0].className === 'box_ok') {
         moveBox(player, d);
     } else if (d[0].className === 'goal') {

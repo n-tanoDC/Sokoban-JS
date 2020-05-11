@@ -1,5 +1,2 @@
 .idea/
-*.bak
-.mwb
-/test/
 config.php

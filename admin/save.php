@@ -16,9 +16,6 @@ $img = imagecreatefromstring($im);
 // Defines the path and filename
 $filename = 'mins/map-min-lvl' . $lvl . '.png';
 
-// Deletes the previous map png
-unlink($filename);
-
 // Creates the png file and pastes it in the right folder
 imagepng($img, $filename);
 
