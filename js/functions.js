@@ -75,6 +75,35 @@ function voidMap() {
     }
 }
 
+function setListeners() {
+    let i,
+        map = document.querySelectorAll('td');
+    for (let i = 0 ; i < map.length ; i++) {
+        map[i].addEventListener('mousedown', function (e) {
+            if (e.button === 0) {
+                if(eraserMode){
+                    map[i].className = 'empty';
+                } else {
+                    map[i].className = selectedTile;
+                }
+                clicGauche = true;
+            } else if (e.button === 2) {
+                eraserMode = !eraserMode;
+            }
+        });
+        map[i].addEventListener('mouseup', function(){
+            clicGauche = false;
+        });
+        map[i].addEventListener('mouseover', function(){
+            if(clicGauche && !eraserMode){
+                map[i].className = selectedTile;
+            } else if(clicGauche && eraserMode){
+                map[i].className = 'empty';
+            }
+        });
+    }
+}
+
 function changeHeight(map, height){
     let currentHeight = document.querySelectorAll('tr').length,
         currentWidth = document.querySelectorAll('td').length/currentHeight,
@@ -94,6 +123,7 @@ function changeHeight(map, height){
             map.firstElementChild.deleteRow(-1);
         }
     }
+    setListeners();
 }
 
 function changeWidth(map, width) {
@@ -116,37 +146,13 @@ function changeWidth(map, width) {
             }
         }
     }
-
+    setListeners();
 }
 
-function setListeners() {
-    let i,
-        map = document.querySelectorAll('td');
-    for (let i = 0 ; i < map.length ; i++) {
-        map[i].addEventListener('mousedown', function (e) {
-            if (e.button === 0) {
-                if(eraserMode){
-                    map[i].className = 'empty';
-                } else {
-                    map[i].className = selectedTile.className;
-                }
-                clicGauche = true;
-            } else if (e.button === 2) {
-                eraserMode = !eraserMode;
-            }
-        });
-        map[i].addEventListener('mouseup', function(){
-            clicGauche = false;
-        });
-        map[i].addEventListener('mouseover', function(){
-            if(clicGauche && !eraserMode){
-                map[i].className = selectedTile.className;
-            } else if(clicGauche && eraserMode){
-                map[i].className = 'empty';
-            }
-        });
-        map[i].addEventListener('contextmenu', function (e) {
-            e.preventDefault();
-        })
+function displayBorder(selectedTile, allTiles) {
+    for (const tile of allTiles) {
+        tile.style.borderWidth = '0';
     }
+    selectedTile.style.borderWidth = '2px';
 }
+

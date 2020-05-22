@@ -3,7 +3,15 @@ $title = 'Editeur';
 require_once __DIR__ . "/../includes/header.php";
 ?>
 
-<div id="game_screen">
+<main>
+    <div id="tiles">
+        <div class="goal tile"> </div>
+        <div class="wall tile"> </div>
+        <div class="box tile"> </div>
+        <div class="box_ok tile"> </div>
+        <div class="player_down tile"> </div>
+    </div>
+    <div id="game_screen">
         <form action="save.php" method="post">
             <input type="hidden" name="map" id="saved_map">
             <?php
@@ -25,13 +33,7 @@ require_once __DIR__ . "/../includes/header.php";
 
             <button id="save_button">Sauvegarder</button>
         </form>
-        <div id="selected_tile" class="wall"></div>
     </div>
-<div style="display: flex">
-    <div id="goal" class="goal tile"> </div>
-    <div id="wall" class="wall tile"> </div>
-    <div id="box" class="box tile"> </div>
-    <div id="box_ok" class="box_ok tile"> </div>
-    <div id="player" class="player_down tile"> </div>
-</div>
+</main>
+
 <?php getFooter(['html2canvas.js', 'functions.js', 'editor.js'], true);

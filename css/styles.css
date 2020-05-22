@@ -71,19 +71,13 @@ a:hover {
     width: 68px;
 }
 
-#selected_tile {
-    width: 34px;
-    height: 34px;
-    position: absolute;
-    display: none;
-}
-
 #game_screen {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
 }
 .minimaps {
     display: flex;
@@ -96,6 +90,7 @@ table {
     border-collapse: collapse;
     background: rgb(101, 159, 62);
     box-shadow: 5px 5px 20px rgb(50, 50, 50);
+    margin: 20px auto;
 }
 
 td {
@@ -107,6 +102,9 @@ td {
 .tile {
     width: 34px;
     height: 34px;
+    margin: 10px;
+    border: 0 solid red;
+    border-radius: 5px;
 }
 
 .goal {
@@ -203,4 +201,13 @@ form {
 #index-link
 {
     margin-top: 10px;
+}
+
+#tiles {
+    display: flex;
+    justify-content: center;
+}
+
+form button {
+    margin: 20px;
 }
